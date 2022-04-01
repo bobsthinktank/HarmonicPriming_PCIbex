@@ -1,9 +1,20 @@
 PennController.ResetPrefix()
-Sequence("welcome", "headphoneCheck", "passed", "instr", "HPTask", "send", "debrief","exit" );
+Sequence("consent", "welcome", "headphoneCheck", "passed", "instr", randomize("HPTask"), "send", "debrief","exit" );
 //PennController.DebugOff();
 PennController.SendResults( "send" );
 
-//add consent/assent
+PennController("consent",
+        defaultText
+            .print()
+        ,
+        newText("<p>This is not a consent form yet.</p>")
+        ,
+        newText("<br/>")
+        ,
+        newButton("consent","I consent")
+            .print()
+            .wait()
+);
 
 PennController("welcome",
         defaultText
@@ -78,7 +89,7 @@ PennController( "passed" ,
 
     getVar("passed").test.is(0)
         .success(
-            newText("Hmm, it seems like you are not wearing headphones. <br/> If possible, please put on headphones before continuing.<br/><br/>")   
+            newText("<p>Hmm, it seems like you are not wearing headphones. <br/><br/> If possible, please put on headphones before continuing.</p>")   
                 .print()
             ,
             newTimer("wait", 2000)
@@ -86,10 +97,10 @@ PennController( "passed" ,
                 .wait()
         )
         .failure(
-            newText("Great, it appears you are wearing headphones. Thanks!<br/><br/>")   
+            newText("<p>Great, it appears you are wearing headphones. Thanks!</p>")   
                 .print()
             ,
-            newTimer("wait", 500)
+            newTimer("wait2", 500)
                 .start()
                 .wait()
         )
@@ -110,25 +121,69 @@ PennController("instr",
         ,
         newText("<p><strong>Instructions</strong></p>")
         ,
-        newText("<p>Blah blah blah. Tuning of last chord. </p>")
+        newText("<p>On each trial, you will hear a short chord sequence. Your job is to listen to the sequence; when it ends, you'll be asked if the final chord was in-key or out-of-key. </p>")
         ,
-        newText("<p>**add examples**</p>")
+        newText("<p>**add examples of in- and out-of-key chords**</p>")
+        ,
+        newText("<p>**maybe also add a practice/example trial or two**</p>")
         ,
         newButton("button", "Continue")
             .print()
             .wait()
 );
 
-PennController("HPTask",
-        defaultText
+PennController.Template( "HP_list.csv" ,
+    variable => PennController( "HPTask" ,
+        
+        newCanvas("screen", 800,580)
+            .center()
             .print()
         ,
-        newText("<p><strong>TASK HAPPENS HERE</strong></p>")
+        
+        newText("cue", "+").center()
         ,
-        newButton("button", "Continue")
-            .print()
+        newText("prompt", "Was the last chord in-key or out-of-key?").center()
+        ,
+        newText("press", "<i>Press <strong>Z</strong> for in-key or <strong>M</strong> for out-of-key</i>").center()
+        ,
+		
+        getCanvas("screen").add("center at 50%","middle at 50%", getText("cue") )
+        ,
+        newTimer("wait3", 500)
+            .start()
             .wait()
+        ,
+        newAudio("audio", variable.SoundPath)
+            .play()
+            .wait()
+        ,
+
+        getCanvas("screen")
+			.remove(getText("cue"))
+			.add("center at 50%","middle at 50%", getText("prompt") )
+			.add("center at 50%","middle at 65%", getText("press") )
+			.print()
+        ,
+        
+        newKey("ZMzm")
+			.log()
+			.wait()
+        ,
+        
+        getCanvas("screen")
+            .remove(getText("prompt"))
+            .remove(getText("press"))
+        ,
+
+        getCanvas("screen").remove()
+
+    )
+    .log( "ParticipantID", PennController.GetURLParameter("id") )
+    .log("List", variable.Group)
+    .log("Item", variable.ItemNumber)
+    .log("Condition", variable.SoundFile)
 );
+
 
 PennController( "debrief" ,
         defaultText
@@ -140,10 +195,10 @@ PennController( "debrief" ,
         ,
         newText("<p>The aim of this study was blah blah blah.</p>")
         ,
-        newText("<p>Of course, we don’t know the results of this experiment yet as we are still collecting data. However, if you still have any questions about this experiment, please feel free to contact Dr. Slevc at slevc@umd.edu.</p>")
-        ,
-        newText("<p>Finally, please don’t share any information about the experiment with other people who might participate, just in case knowing the goal of the experiment could bias peoples’ responses in some way.</p>")
-        ,
+//        newText("<p>Of course, we don’t know the results of this experiment yet as we are still collecting data. However, if you still have any questions about this experiment, please feel free to contact Dr. Slevc at slevc@umd.edu.</p>")
+//        ,
+//        newText("<p>Finally, please don’t share any information about the experiment with other people who might participate, just in case knowing the goal of the experiment could bias peoples’ responses in some way.</p>")
+//        ,
         // UPDATE THIS:
         newText("<p>Thanks again for participating! "+'<strong><a href="https://umpsychology.sona-systems.com/">Click here to confirm participation on SONA</a>.</strong>')
             .print()
