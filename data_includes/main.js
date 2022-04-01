@@ -28,7 +28,7 @@ PennController("welcome",
         ,
         newText("<br/>")
         ,
-        newButton("button", "Continue")
+        newButton("check", "Start Headphone Check")
             .print()
             .wait()
 );
@@ -38,19 +38,12 @@ jQuery.prototype.on = function(...args) { return jQuery.prototype.bind.apply(thi
 jQuery.prototype.prop = function(...args) { return jQuery.prototype.attr.apply(this, args); }
 
 PennController( "headphoneCheck" ,
-    newButton("check", "Start Headphone Check")
-        .print()
-    ,
     // This Canvas will contain the test itself
     newCanvas("headphonecheck", 500,2000)
         .print()
     ,
     // The HeadphoneCheck module fills the element whose id is "hc-container"
     newFunction( () => getCanvas("headphonecheck")._element.jQueryElement.attr("id", "hc-container") ).call()
-    ,
-    getButton("check")
-        .wait()
-        .remove()
     ,
     // Create this Text element, but don't print it just yet
     newText("failure", "Sorry, you failed the headphone check")
