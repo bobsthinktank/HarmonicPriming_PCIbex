@@ -1,0 +1,9 @@
+Group,ItemNumber,Block,Brightness,Ans,AnsUC,Scale,Relatedness,Timbre,SoundFile,SoundPath
+1,practice,practice,the SAME,z,Z,practice,practice,guitar,same_practice_guitar_01.mp3,https://github.com/bobsthinktank/HarmonicPrimingStimuli/blob/main/chordsequences/same_practice_guitar_01.mp3?raw=true
+1,practice,practice,BRIGHT,m,M,practice,practice,guitar,bright_practice_guitar_01.mp3,https://github.com/bobsthinktank/HarmonicPrimingStimuli/blob/main/chordsequences/bright_practice_guitar_01.mp3?raw=true
+2,practice,practice,the SAME,z,Z,practice,practice,piano,same_practice_piano_01.mp3,https://github.com/bobsthinktank/HarmonicPrimingStimuli/blob/main/chordsequences/same_practice_piano_01.mp3?raw=true
+2,practice,practice,BRIGHT,m,M,practice,practice,piano,bright_practice_piano_01.mp3,https://github.com/bobsthinktank/HarmonicPrimingStimuli/blob/main/chordsequences/bright_practice_piano_01.mp3?raw=true
+3,practice,practice,the SAME,z,Z,practice,practice,guitar,same_practice_guitar_01.mp3,https://github.com/bobsthinktank/HarmonicPrimingStimuli/blob/main/chordsequences/same_practice_guitar_01.mp3?raw=true
+3,practice,practice,BRIGHT,m,M,practice,practice,guitar,bright_practice_guitar_01.mp3,https://github.com/bobsthinktank/HarmonicPrimingStimuli/blob/main/chordsequences/bright_practice_guitar_01.mp3?raw=true
+4,practice,practice,the SAME,z,Z,practice,practice,piano,same_practice_piano_01.mp3,https://github.com/bobsthinktank/HarmonicPrimingStimuli/blob/main/chordsequences/same_practice_piano_01.mp3?raw=true
+4,practice,practice,BRIGHT,m,M,practice,practice,piano,bright_practice_piano_01.mp3,https://github.com/bobsthinktank/HarmonicPrimingStimuli/blob/main/chordsequences/bright_practice_piano_01.mp3?raw=true
